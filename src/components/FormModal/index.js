@@ -107,7 +107,7 @@ const FormModal = ({show, onClose, id, data, setIsLoading}) => {
                     </label>
                     </div>
                     <div className="px-5 py-4 border-t border-[#e5e5e5] flex justify-end">
-                        <Button type="primary" text="Simpan" className="md:px-9" disabled={!form.name} onClick={data ? editItem : createItem} data-cy="modal-add-save-button" />
+                        <Button type="primary" text="Simpan" className="md:px-9" disabled={!form.name} onClick={data ? editItem : createItem} cy="modal-add-save-button" />
                     </div>
                 </div>
             </div>

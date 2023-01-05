@@ -43,7 +43,7 @@ const Home = () => {
 							<ActivityCard key={d.id} id={d.id} title={d.title} date={d.updated_at} setAlertShow={setAlertShow} setIsLoading={setIsLoading} />
 						))}
 					</div>
-				) : <EmptyState image={empty} text="Buat activity pertamamu" data-cy="activity-empty-state" />}
+				) : <EmptyState image={empty} text="Buat activity pertamamu" cy="activity-empty-state" />}
 			</div>
             {/* alert */}
             <Alert show={alertShow} setShow={setAlertShow} />

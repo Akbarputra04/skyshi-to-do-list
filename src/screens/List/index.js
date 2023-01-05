@@ -76,7 +76,7 @@ const List = () => {
                             <TodoItem key={d.id} id={d.id} title={d.title} priority={d.priority} active={d.is_active} setAlertShow={setAlertShow} setIsLoading={setIsLoading} />
                         ))}
                     </div>
-                ) : <EmptyState image={empty} text="Buat List Item kamu" data-cy="todo-empty-state" /> }
+                ) : <EmptyState image={empty} text="Buat List Item kamu" cy="todo-empty-state" /> }
 			</div>
             {/* modal */}
             <FormModal show={modalShow} onClose={() => setModalShow(false)} id={id} setIsLoading={setIsLoading} />
