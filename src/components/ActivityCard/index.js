@@ -22,7 +22,7 @@ const Activity = ({id, title, date, setAlertShow, setIsLoading}) => {
 
     return (
         <>
-            <Link to={`/list/${id}`} className="p-4 rounded-xl bg-white drop-shadow-lg h-[150px] md:h-[234px]">
+            <Link to={`/list/${id}`} className="p-4 rounded-xl bg-white drop-shadow-lg h-[150px] md:h-[234px]" data-cy="activity-item">
                 <div className="h-full flex flex-col justify-between items-start">
                     <h4 className="font-bold text-sm md:text-lg" data-cy="activity-item-title">{title}</h4>
                     <div className="w-full flex justify-between items-center text-[#888888]">

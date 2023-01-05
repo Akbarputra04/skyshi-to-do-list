@@ -35,7 +35,7 @@ const Sorter = ({data, setData}) => {
             <button onClick={toggleSortList} className="px-3 py-3 border rounded-full flex gap-1.5 items-center font-semibold text-xs text-[#888888]" data-cy="todo-sort-button">
                 <BsArrowDownUp className="md:w-6 md:h-6" />
             </button>
-            <div className={`absolute right-0 w-max bg-white drop-shadow-lg rounded z-10 mt-3 ${!open ? 'hidden' : 'block'} `}>
+            <div className={`absolute right-0 w-max bg-white drop-shadow-lg rounded z-10 mt-3 ${!open ? 'hidden' : 'block'} `} data-cy="sort-selection">
                 <button onClick={() => sortItem(0)} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection-latest">
                     <div className="flex items-center gap-3 text-xs md:text-base">
                         <BsSortDown className="text-primary" />

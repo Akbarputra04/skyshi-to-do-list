@@ -102,12 +102,12 @@ const FormModal = ({show, onClose, id, data, setIsLoading}) => {
                             styles={optionStyle}
                             className="md:w-fit md:text-base"
                             onChange={val => setForm({...form, priority: val})}
-                            data-cy="modal-add-priority-input"
+                            data-cy="modal-add-priority-dropdown"
                         />
                     </label>
                     </div>
                     <div className="px-5 py-4 border-t border-[#e5e5e5] flex justify-end">
-                        <Button type="primary" text="Simpan" className="md:px-9" disabled={!form.name} onClick={data ? editItem : createItem} data-cy="modal-add-button" />
+                        <Button type="primary" text="Simpan" className="md:px-9" disabled={!form.name} onClick={data ? editItem : createItem} data-cy="modal-add-save-button" />
                     </div>
                 </div>
             </div>
