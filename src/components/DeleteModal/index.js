@@ -11,8 +11,8 @@ const DeleteModal = ({show, onClose, text, isActivity = true, confirmHandler}) =
                     <BsExclamationTriangle size={46} className="text-danger" data-cy="modal-delete-title" />
                     <p className="font-medium text-sm md:text-lg text-center" data-cy="modal-delete-title">Apakah anda yakin menghapus {isActivity ? 'activity' : 'item'} <span className="font-bold">“{text}”?</span></p>
                     <div className="w-full flex items-center gap-2.5">
-                        <Button type="secondary" text="Batal" className="flex-1 bg-secondary" onClick={onClose} data-cy="modal-delete-cancel-button" />
-                        <Button type="danger" text="Hapus" className="flex-1" onClick={confirmHandler} data-cy="modal-delete-confirm-button" />
+                        <Button type="secondary" text="Batal" className="flex-1 bg-secondary" onClick={onClose} cy="modal-delete-cancel-button" />
+                        <Button type="danger" text="Hapus" className="flex-1" onClick={confirmHandler} cy="modal-delete-confirm-button" />
                     </div>
                 </div>
             </div>

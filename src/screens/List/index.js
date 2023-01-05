@@ -67,7 +67,7 @@ const List = () => {
                     </div>
                     <div className="flex items-center justify-end gap-2">
                         <Sorter data={data} setData={setData} />
-                        <Button type="primary" icon={<BsPlusLg/>} text="Tambah" onClick={showModal} data-cy="todo-add-button" />
+                        <Button type="primary" icon={<BsPlusLg/>} text="Tambah" onClick={showModal} cy="todo-add-button" />
                     </div>
                 </div>
                 {data.todo_items.length > 0 ? (
