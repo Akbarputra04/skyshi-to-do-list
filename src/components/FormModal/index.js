@@ -93,7 +93,7 @@ const FormModal = ({show, onClose, id, data, setIsLoading}) => {
                         focus:invalid:border-danger focus:invalid:ring-danger
                         " value={form.name} onChange={e => setForm({...form, name: e.target.value})} data-cy="modal-add-name-input" />
                     </label>
-                    <label className="block">
+                    <label className="block" data-cy="modal-add-priority-dropdown">
                         <span className="block text-[10px] md:text-xs font-semibold" data-cy="modal-add-priority-title">PRIORITY</span>
                         <Select
                             name="priority"
@@ -102,7 +102,6 @@ const FormModal = ({show, onClose, id, data, setIsLoading}) => {
                             styles={optionStyle}
                             className="md:w-fit md:text-base"
                             onChange={val => setForm({...form, priority: val})}
-                            data-cy="modal-add-priority-dropdown"
                         />
                     </label>
                     </div>
