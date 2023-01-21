@@ -54,7 +54,7 @@ const List = () => {
   return (
     <>
 			{/* header */}
-			<Header title={data.title} isHome />
+			<Header title={data.title} />
 			{/* content */}
 			<div className="min-h-screen px-5 pt-24 md:px-56 md:pt-36 pb-7 h-full flex flex-col gap-6">
                 <div className="flex flex-col gap-6 md:gap-0 md:flex-row md:justify-between">
