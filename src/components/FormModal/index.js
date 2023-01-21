@@ -74,7 +74,7 @@ const FormModal = ({show, onClose, id, data, setIsLoading}) => {
       }
 
     return (
-        <div>
+        <>
             <div className={`absolute top-0 left-0 h-screen w-screen bg-black/50 z-20 ${show ? 'block' : 'hidden'}`} onClick={onClose}>
             </div>
             <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8/12 md:w-4/12 bg-white rounded-xl drop-shadow-lg z-20 ${show ? 'block' : 'hidden'}`} data-cy="modal-add">
@@ -108,7 +108,7 @@ const FormModal = ({show, onClose, id, data, setIsLoading}) => {
                     <Button type="primary" text="Simpan" className="md:px-9" disabled={!form.name} onClick={data ? editItem : createItem} cy="modal-add-save-button" />
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
