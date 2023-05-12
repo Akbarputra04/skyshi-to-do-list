@@ -1,9 +1,14 @@
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { BsPencil, BsPlusLg, BsChevronLeft } from 'react-icons/bs'
 import { useParams, useNavigate } from 'react-router-dom';
 import API from '../../API';
 import empty from '../../assets/list-empty.png'
-import { Button, EmptyState, FormModal, Header, Sorter, TodoItem, Alert } from '../../components';
+import { Button, EmptyState, FormModal, Header, Sorter, TodoItem, Alert, DeleteModal } from '../../components';
+
+export const ListContext = createContext({
+	setDeleteShow: (state) => {},
+	setCurrentData: (state) => {},
+})
 
 const List = () => {
     const navigate = useNavigate()
@@ -20,10 +25,12 @@ const List = () => {
 
     const [isLoading, setIsLoading] = useState(true)
 	const [data, setData] = useState({todo_items: []})
+	const [currentData, setCurrentData] = useState({})
 
     const [newActivityTitle, setNewActivityTitle] = useState('')
 
     const [modalShow, setModalShow] = useState(false)
+    const [deleteShow, setDeleteShow] = useState(false)
 	const [alertShow, setAlertShow] = useState(false)
 
     useEffect(() => {
@@ -46,13 +53,23 @@ const List = () => {
 		.catch(err => console.log(err))
         .finally(() => setNewActivityTitle(''))
     }
+    
+    const deleteItem = () => {
+        API.delete(`todo-items/${currentData.id}`)
+        .then(() => {
+            setDeleteShow(false)
+            setAlertShow(true)
+        })
+        .catch(err => console.log(err))
+        .finally(() => setIsLoading(true))
+    }
 
     const showModal = () => {
         setModalShow(true)
     }
 
   return (
-    <>
+    <ListContext.Provider value={{setDeleteShow, setCurrentData}}>
 			{/* header */}
 			<Header title={data.title} />
 			{/* content */}
@@ -61,7 +78,7 @@ const List = () => {
                     <div className="w-full md:w-fit flex items-center border-b border-[#D8D8D8]">
                         <div className="flex items-center gap-6">
                             <button className="hidden md:block" onClick={() => navigate(-1)}><BsChevronLeft size={24} /></button>
-                            <input type="text" name="title" id="title" placeholder="New Activity Name" className="flex-1 p-2.5 font-semibold md:text-4xl focus:outline-none" value={newActivityTitle || data.title} onChange={e => setNewActivityTitle(e.target.value)} data-cy="todo-title-input" />
+                            <input type="text" name="title" id="title" placeholder="New Activity Name" className="flex-1 p-2.5 font-semibold md:text-4xl focus:outline-none" value={newActivityTitle || data.title} onChange={e => setNewActivityTitle(e.target.value)} data-cy="todo-title" />
                         </div>
                         <label htmlFor="title" data-cy="todo-title-edit-button"><BsPencil color="#D8D8D8" onClick={newActivityTitle ? saveTitle : null} /></label>
                     </div>
@@ -73,16 +90,18 @@ const List = () => {
                 {data.todo_items.length > 0 ? (
                     <div className="flex flex-col gap-2.5">
                         {data.todo_items.map(d => (
-                            <TodoItem key={d.id} id={d.id} title={d.title} priority={d.priority} active={d.is_active} setAlertShow={setAlertShow} setIsLoading={setIsLoading} />
+                            <TodoItem key={d.id} id={d.id} title={d.title} priority={d.priority} active={d.is_active} />
                         ))}
                     </div>
                 ) : <EmptyState image={empty} text="Buat List Item kamu" cy="todo-empty-state" /> }
 			</div>
             {/* modal */}
             <FormModal show={modalShow} onClose={() => setModalShow(false)} id={id} setIsLoading={setIsLoading} />
+            {/* delete modal */}
+            <DeleteModal show={deleteShow} onClose={() => setDeleteShow(false)} text={currentData.title} isActivity={false} confirmHandler={deleteItem} />
             {/* alert */}
             <Alert show={alertShow} setShow={setAlertShow} isActivity={false} />
-		</>
+		</ListContext.Provider>
 	)
 };
 

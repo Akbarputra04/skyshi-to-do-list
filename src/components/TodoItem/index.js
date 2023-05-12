@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { BsPencil, BsTrash } from "react-icons/bs"
 import API from '../../API';
 import { FormModal } from '../../components';
-import DeleteModal from "../DeleteModal"
+import { ListContext } from '../../screens/List';
 
 const TodoItem = ({id, title, priority, active, setAlertShow, setIsLoading}) => {
     const priorityConfig = {
@@ -13,8 +13,9 @@ const TodoItem = ({id, title, priority, active, setAlertShow, setIsLoading}) => 
         "very-low": 'bg-purple',
     }
 
+    const parentContext = useContext(ListContext)
+
     const [show, setShow] = useState(false)
-    const [deleteShow, setDeleteShow] = useState(false)
 
     const changeStatus = () => {
         API.patch(`todo-items/${id}`, {is_active: !active})
@@ -22,14 +23,13 @@ const TodoItem = ({id, title, priority, active, setAlertShow, setIsLoading}) => 
         .catch(err => console.log(err))
     }
 
-    const deleteitem = () => {
-        API.delete(`todo-items/${id}`)
-        .then(() => {
-            setDeleteShow(false)
-            setAlertShow(true)
+    const handleClickDelete = e => {
+        e.preventDefault()
+        parentContext.setDeleteShow(true)
+        API.get(`todo-items/${id}`)
+        .then((data) => {
+            parentContext.setCurrentData({id: data.data.id, title: data.data.title})
         })
-        .catch(err => console.log(err))
-        .finally(() => setIsLoading(true))
     }
 
     return (
@@ -43,12 +43,10 @@ const TodoItem = ({id, title, priority, active, setAlertShow, setIsLoading}) => 
                         <BsPencil color="#888888" data-cy="todo-item-edit-button" onClick={e => {e.preventDefault(); setShow(true)}} />
                     </div>
                 </div>
-                <BsTrash color="#888888" onClick={e => {e.preventDefault(); setDeleteShow(true)}} data-cy="todo-item-delete-button" />
+                <BsTrash color="#888888" onClick={handleClickDelete} data-cy="todo-item-delete-button" />
             </div>
             {/* modal */}
             <FormModal show={show} onClose={() => setShow(false)} id={id} data={{title, priority}} setIsLoading={setIsLoading} />
-            {/* delete */}
-            <DeleteModal show={deleteShow} onClose={() => setDeleteShow(false)} text={title} isActivity={false} confirmHandler={deleteitem} />
         </>
     )
 }
