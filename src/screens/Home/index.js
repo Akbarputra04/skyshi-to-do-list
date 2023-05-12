@@ -1,15 +1,22 @@
-import { useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { BsPlusLg } from 'react-icons/bs'
 import API from '../../API';
 import empty from '../../assets/home-empty.png'
-import { ActivityCard, Alert, Button, EmptyState, Header } from '../../components';
+import { ActivityCard, Alert, Button, DeleteModal, EmptyState, Header } from '../../components';
+
+export const HomeContext = createContext({
+	setDeleteShow: (state) => {},
+	setCurrentData: (state) => {},
+})
 
 const Home = () => {
 
 	const [isLoading, setIsLoading] = useState(true)
 	const [data, setData] = useState([])
+	const [currentData, setCurrentData] = useState({})
 
 	const [alertShow, setAlertShow] = useState(false)
+	const [deleteShow, setDeleteShow] = useState(false)
 
 	useEffect(() => {
 		API.get('activity-groups?email=email@mail.com')
@@ -27,8 +34,18 @@ const Home = () => {
 		.catch(err => console.log(err))
 	}
 
+	const deleteActivity = () => {
+        API.delete(`activity-groups/${currentData.id}`)
+        .then(() => {
+            setDeleteShow(false)
+            setAlertShow(true)
+        })
+        .catch(err => console.log(err))
+        .finally(() => setIsLoading(true))
+    }
+
   return (
-    <>
+    <HomeContext.Provider value={{setDeleteShow, setCurrentData}}>
 			{/* header */}
 			<Header title="TO DO LIST APP" isHome />
 			{/* content */}
@@ -45,9 +62,11 @@ const Home = () => {
 					</div>
 				) : <EmptyState image={empty} text="Buat activity pertamamu" cy="activity-empty-state" />}
 			</div>
+			{/* delete modal */}
+            <DeleteModal show={deleteShow} onClose={() => setDeleteShow(false)} text={currentData.title} confirmHandler={deleteActivity} />
             {/* alert */}
             <Alert show={alertShow} setShow={setAlertShow} />
-		</>
+		</HomeContext.Provider>
 	)
 };
 
