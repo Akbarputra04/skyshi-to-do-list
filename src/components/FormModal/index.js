@@ -66,37 +66,37 @@ const FormModal = ({show, onClose, id, data, setIsLoading}) => {
                     disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
                     invalid:border-danger invalid:text-danger
                     focus:invalid:border-danger focus:invalid:ring-danger
-                    " value={form.priority} contentEditable={false} onClick={togglePriorityList} data-cy="modal-add-name-input" />
+                    " value={form.priority} contentEditable={false} onClick={togglePriorityList} />
                     <div className={`absolute w-max bg-white drop-shadow-lg rounded z-10 mt-3 ${!open ? 'hidden' : 'block'} `} data-cy="modal-add-priority-item">
-                        <button onClick={() => {setForm({...form, priority : 'very-high'}); togglePriorityList()}} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection-latest">
+                        <button onClick={() => {setForm({...form, priority : 'very-high'}); togglePriorityList()}} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="modal-add-priority-item">
                             <div className="flex items-center gap-3 text-xs md:text-base">
                                 <BsDot style={{transform: 'scale(5)'}} color="#ED4C5C" />
                                 Very High
                             </div>
                             <BsCheck color="#4a4a4a" className={`ml-3 ${form.priority === 'very-high' ? 'opacity-1' : 'opacity-0'}`} />
                         </button>
-                        <button onClick={() => {setForm({...form, priority : 'high'}); togglePriorityList()}} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection-latest">
+                        <button onClick={() => {setForm({...form, priority : 'high'}); togglePriorityList()}} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="modal-add-priority-item">
                             <div className="flex items-center gap-3 text-xs md:text-base">
                                 <BsDot style={{transform: 'scale(5)'}} color="#F8A541" />
                                 High
                             </div>
                             <BsCheck color="#4a4a4a" className={`ml-3 ${form.priority === 'high' ? 'opacity-1' : 'opacity-0'}`} />
                         </button>
-                        <button onClick={() => {setForm({...form, priority : 'normal'}); togglePriorityList()}} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection-latest">
+                        <button onClick={() => {setForm({...form, priority : 'normal'}); togglePriorityList()}} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="modal-add-priority-item">
                             <div className="flex items-center gap-3 text-xs md:text-base">
                                 <BsDot style={{transform: 'scale(5)'}} color="#00A790" />
                                 Normal
                             </div>
                             <BsCheck color="#4a4a4a" className={`ml-3 ${form.priority === 'normal' ? 'opacity-1' : 'opacity-0'}`} />
                         </button>
-                        <button onClick={() => {setForm({...form, priority : 'low'}); togglePriorityList()}} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection-latest">
+                        <button onClick={() => {setForm({...form, priority : 'low'}); togglePriorityList()}} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="modal-add-priority-item">
                             <div className="flex items-center gap-3 text-xs md:text-base">
                                 <BsDot style={{transform: 'scale(5)'}} color="#428BC1" />
                                 Low
                             </div>
                             <BsCheck color="#4a4a4a" className={`ml-3 ${form.priority === 'low' ? 'opacity-1' : 'opacity-0'}`} />
                         </button>
-                        <button onClick={() => {setForm({...form, priority : 'very-low'}); togglePriorityList()}} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection-latest">
+                        <button onClick={() => {setForm({...form, priority : 'very-low'}); togglePriorityList()}} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="modal-add-priority-item">
                             <div className="flex items-center gap-3 text-xs md:text-base">
                                 <BsDot style={{transform: 'scale(5)'}} color="#8942C1" />
                                 Very Low
