@@ -36,35 +36,35 @@ const Sorter = ({data, setData}) => {
                 <BsArrowDownUp className="md:w-6 md:h-6" />
             </button>
             <div className={`absolute right-0 w-max bg-white drop-shadow-lg rounded z-10 mt-3 ${!open ? 'hidden' : 'block'} `} data-cy="sort-selection">
-                <button onClick={() => sortItem(0)} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection-latest">
+                <button onClick={() => sortItem(0)} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection">
                     <div className="flex items-center gap-3 text-xs md:text-base">
                         <BsSortDown className="text-primary" />
                         Terbaru
                     </div>
                     <BsCheck color="#4a4a4a" className={`ml-3 ${sorting === 0 ? 'opacity-1' : 'opacity-0'}`} />
                 </button>
-                <button onClick={() => sortItem(1)} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection-oldest">
+                <button onClick={() => sortItem(1)} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection">
                     <div className="flex items-center gap-3 text-xs md:text-base">
                         <BsSortUp className="text-primary" />
                         Terlama
                     </div>
                     <BsCheck color="#4a4a4a" className={`ml-3 ${sorting === 1 ? 'opacity-1' : 'opacity-0'}`} />
                 </button>
-                <button onClick={() => sortItem(2)} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection-az">
+                <button onClick={() => sortItem(2)} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection">
                     <div className="flex items-center gap-3 text-xs md:text-base">
                         <BsSortAlphaUp className="text-primary" />
                         A-Z
                     </div>
                     <BsCheck color="#4a4a4a" className={`ml-3 ${sorting === 2 ? 'opacity-1' : 'opacity-0'}`} />
                 </button>
-                <button onClick={() => sortItem(3)} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection-za">
+                <button onClick={() => sortItem(3)} className="w-full px-4 py-2.5 flex items-center justify-between border-b border-[#e5e5e5]" data-cy="sort-selection">
                     <div className="flex items-center gap-3 text-xs md:text-base">
                         <BsSortAlphaDown className="text-primary" />
                         Z-A
                     </div>
                     <BsCheck color="#4a4a4a" className={`ml-3 ${sorting === 3 ? 'opacity-1' : 'opacity-0'}`} />
                 </button>
-                <button onClick={() => sortItem(4)} className="w-full px-4 py-2.5 flex items-center justify-between" data-cy="sort-selection-not-finished">
+                <button onClick={() => sortItem(4)} className="w-full px-4 py-2.5 flex items-center justify-between" data-cy="sort-selection">
                     <div className="flex items-center gap-3 text-xs md:text-base">
                         <BsArrowDownUp className="text-primary" />
                         Belum Selesai
