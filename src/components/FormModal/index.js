@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { BsCheck, BsDot, BsX } from "react-icons/bs"
 import { Button } from ".."
-import Select from 'react-select'
 import API from '../../API';
 
 const FormModal = ({show, onClose, id, data, setIsLoading}) => {
@@ -11,7 +10,7 @@ const FormModal = ({show, onClose, id, data, setIsLoading}) => {
         setOpen(!open)
     }
 
-      const [form, setForm] = useState({name: data?.title || '', priority: data?.priority || 'very-high'})
+      const [form, setForm] = useState({name: '', priority: 'very-high'})
 
       const createItem = () => {
         API.post('todo-items', {
@@ -39,6 +38,10 @@ const FormModal = ({show, onClose, id, data, setIsLoading}) => {
 		.catch(err => console.log(err))
         .finally(() => setIsLoading(true))
       }
+
+      useEffect(() => {
+        setForm({name: data?.title || '', priority: data?.priority || 'very-high'})
+      }, [data])
 
     return (
         <>

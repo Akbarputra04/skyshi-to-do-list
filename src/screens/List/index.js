@@ -6,6 +6,7 @@ import empty from '../../assets/list-empty.png'
 import { Button, EmptyState, FormModal, Header, Sorter, TodoItem, Alert, DeleteModal } from '../../components';
 
 export const ListContext = createContext({
+	setModalShow: (state) => {},
 	setDeleteShow: (state) => {},
 	setCurrentData: (state) => {},
 })
@@ -23,11 +24,9 @@ const List = () => {
         "very-low": 5,
     }
 
-    const inputTitleRef = useRef()
-
     const [isLoading, setIsLoading] = useState(true)
 	const [data, setData] = useState({todo_items: []})
-	const [currentData, setCurrentData] = useState({})
+	const [currentData, setCurrentData] = useState()
 
     const [editTitle, setEditTitle] = useState(false)
 
@@ -58,6 +57,7 @@ const List = () => {
         .then(() => {
             setDeleteShow(false)
             setAlertShow(true)
+            setCurrentData()
         })
         .catch(err => console.log(err))
         .finally(() => setIsLoading(true))
@@ -72,7 +72,7 @@ const List = () => {
     }
 
   return (
-    <ListContext.Provider value={{setDeleteShow, setCurrentData}}>
+    <ListContext.Provider value={{setDeleteShow, setCurrentData, setModalShow}}>
 			{/* header */}
 			<Header title={data.title} />
 			{/* content */}
@@ -103,9 +103,9 @@ const List = () => {
                 ) : <EmptyState image={empty} text="Buat List Item kamu" cy="todo-empty-state" /> }
 			</div>
             {/* modal */}
-            <FormModal show={modalShow} onClose={() => setModalShow(false)} id={id} setIsLoading={setIsLoading} />
+            <FormModal show={modalShow} onClose={() => {setModalShow(false); setCurrentData()}} id={id} data={currentData} setIsLoading={setIsLoading} />
             {/* delete modal */}
-            <DeleteModal show={deleteShow} onClose={() => setDeleteShow(false)} text={currentData.title} isActivity={false} confirmHandler={deleteItem} />
+            <DeleteModal show={deleteShow} onClose={() => {setDeleteShow(false); setCurrentData()}} text={currentData?.title} isActivity={false} confirmHandler={deleteItem} />
             {/* alert */}
             <Alert show={alertShow} setShow={setAlertShow} isActivity={false} />
 		</ListContext.Provider>
