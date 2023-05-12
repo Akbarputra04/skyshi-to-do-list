@@ -3,7 +3,7 @@ import { BsPencil, BsTrash } from "react-icons/bs"
 import API from '../../API';
 import { ListContext } from '../../screens/List';
 
-const TodoItem = ({id, title, priority, active, setAlertShow, setIsLoading}) => {
+const TodoItem = ({id, title, priority, active, setIsLoading}) => {
     const priorityConfig = {
         "very-high": 'bg-danger',
         "high": 'bg-orange',
@@ -13,8 +13,6 @@ const TodoItem = ({id, title, priority, active, setAlertShow, setIsLoading}) => 
     }
 
     const parentContext = useContext(ListContext)
-
-    const [show, setShow] = useState(false)
 
     const changeStatus = () => {
         API.patch(`todo-items/${id}`, {is_active: !active})
@@ -36,7 +34,7 @@ const TodoItem = ({id, title, priority, active, setAlertShow, setIsLoading}) => 
         parentContext.setModalShow(true)
         API.get(`todo-items/${id}`)
         .then((data) => {
-            parentContext.setCurrentData({title: data.data.title, priority: data.data.priority})
+            parentContext.setCurrentData({id: data.data.id, title: data.data.title, priority: data.data.priority})
         })
     }
 

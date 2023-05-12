@@ -19,7 +19,6 @@ const FormModal = ({show, onClose, id, data, setIsLoading}) => {
             priority: form.priority
         })
 		.then(() => {
-            setForm({name: '', priority: 'very-high'})
             onClose()
         })
 		.catch(err => console.log(err))
@@ -32,7 +31,6 @@ const FormModal = ({show, onClose, id, data, setIsLoading}) => {
             priority: form.priority
         })
 		.then(() => {
-            setForm({name: '', priority: 'very-high'})
             onClose()
         })
 		.catch(err => console.log(err))

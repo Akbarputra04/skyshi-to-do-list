@@ -97,13 +97,13 @@ const List = () => {
                 {data.todo_items.length > 0 ? (
                     <div className="flex flex-col gap-2.5">
                         {data.todo_items.map(d => (
-                            <TodoItem key={d.id} id={d.id} title={d.title} priority={d.priority} active={d.is_active} />
+                            <TodoItem key={d.id} id={d.id} title={d.title} priority={d.priority} active={d.is_active} setIsLoading={setIsLoading} />
                         ))}
                     </div>
                 ) : <EmptyState image={empty} text="Buat List Item kamu" cy="todo-empty-state" /> }
 			</div>
             {/* modal */}
-            <FormModal show={modalShow} onClose={() => {setModalShow(false); setCurrentData()}} id={id} data={currentData} setIsLoading={setIsLoading} />
+            <FormModal show={modalShow} onClose={() => {setModalShow(false); setCurrentData()}} id={currentData?.id} data={currentData} setIsLoading={setIsLoading} />
             {/* delete modal */}
             <DeleteModal show={deleteShow} onClose={() => {setDeleteShow(false); setCurrentData()}} text={currentData?.title} isActivity={false} confirmHandler={deleteItem} />
             {/* alert */}
