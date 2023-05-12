@@ -103,7 +103,7 @@ const List = () => {
                 ) : <EmptyState image={empty} text="Buat List Item kamu" cy="todo-empty-state" /> }
 			</div>
             {/* modal */}
-            <FormModal show={modalShow} onClose={() => {setModalShow(false); setCurrentData()}} id={currentData?.id} data={currentData} setIsLoading={setIsLoading} />
+            <FormModal show={modalShow} onClose={() => {setModalShow(false); setCurrentData()}} id={id} data={currentData} setIsLoading={setIsLoading} />
             {/* delete modal */}
             <DeleteModal show={deleteShow} onClose={() => {setDeleteShow(false); setCurrentData()}} text={currentData?.title} isActivity={false} confirmHandler={deleteItem} />
             {/* alert */}

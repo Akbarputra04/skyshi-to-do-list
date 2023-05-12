@@ -19,6 +19,7 @@ const FormModal = ({show, onClose, id, data, setIsLoading}) => {
             priority: form.priority
         })
 		.then(() => {
+            setForm({name: '', priority: 'very-high'})
             onClose()
         })
 		.catch(err => console.log(err))
@@ -26,11 +27,12 @@ const FormModal = ({show, onClose, id, data, setIsLoading}) => {
       }
 
       const editItem = () => {
-        API.patch(`todo-items/${id}`, {
+        API.patch(`todo-items/${data.id}`, {
             title: form.name,
             priority: form.priority
         })
 		.then(() => {
+            setForm({name: '', priority: 'very-high'})
             onClose()
         })
 		.catch(err => console.log(err))
