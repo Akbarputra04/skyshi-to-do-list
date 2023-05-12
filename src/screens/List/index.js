@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useRef, useState } from 'react';
 import { BsPencil, BsPlusLg, BsChevronLeft } from 'react-icons/bs'
 import { useParams, useNavigate } from 'react-router-dom';
 import API from '../../API';
@@ -23,11 +23,13 @@ const List = () => {
         "very-low": 5,
     }
 
+    const inputTitleRef = useRef()
+
     const [isLoading, setIsLoading] = useState(true)
 	const [data, setData] = useState({todo_items: []})
 	const [currentData, setCurrentData] = useState({})
 
-    const [newActivityTitle, setNewActivityTitle] = useState('')
+    const [editTitle, setEditTitle] = useState(false)
 
     const [modalShow, setModalShow] = useState(false)
     const [deleteShow, setDeleteShow] = useState(false)
@@ -46,12 +48,9 @@ const List = () => {
     }, [isLoading])
 
     const saveTitle = e => {
-        e.preventDefault()
-
-        API.patch(`activity-groups/${id}`, {title: newActivityTitle})
+        API.patch(`activity-groups/${id}`, {title: e.target.value})
         .then(() => setIsLoading(true))
 		.catch(err => console.log(err))
-        .finally(() => setNewActivityTitle(''))
     }
     
     const deleteItem = () => {
@@ -68,6 +67,10 @@ const List = () => {
         setModalShow(true)
     }
 
+    const toggleInput = () => {
+        setEditTitle(current => !current)
+    }
+
   return (
     <ListContext.Provider value={{setDeleteShow, setCurrentData}}>
 			{/* header */}
@@ -78,9 +81,13 @@ const List = () => {
                     <div className="w-full md:w-fit flex items-center border-b border-[#D8D8D8]">
                         <div className="flex items-center gap-6">
                             <button className="hidden md:block" onClick={() => navigate(-1)}><BsChevronLeft size={24} /></button>
-                            <input type="text" name="title" id="title" placeholder="New Activity Name" className="flex-1 p-2.5 font-semibold md:text-4xl focus:outline-none" value={newActivityTitle || data.title} onChange={e => setNewActivityTitle(e.target.value)} data-cy="todo-title" />
+                            {editTitle ? (
+                                <input type="text" name="title" id="title" placeholder="New Activity Name" className="flex-1 p-2.5 font-semibold md:text-4xl focus:outline-none" autoFocus value={data.title} onChange={saveTitle} onBlur={toggleInput} />
+                            ) : (
+                                <p type="text" placeholder="New Activity Name" className="flex-1 p-2.5 font-semibold md:text-4xl focus:outline-none" data-cy="todo-title" onClick={toggleInput}>{data.title}</p>
+                            )}
                         </div>
-                        <label htmlFor="title" data-cy="todo-title-edit-button"><BsPencil color="#D8D8D8" onClick={newActivityTitle ? saveTitle : null} /></label>
+                        <label htmlFor="title" data-cy="todo-title-edit-button"><BsPencil color="#D8D8D8" /></label>
                     </div>
                     <div className="flex items-center justify-end gap-2">
                         <Sorter data={data} setData={setData} />

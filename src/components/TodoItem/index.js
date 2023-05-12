@@ -43,7 +43,7 @@ const TodoItem = ({id, title, priority, active, setAlertShow, setIsLoading}) => 
                         <BsPencil color="#888888" data-cy="todo-item-edit-button" onClick={e => {e.preventDefault(); setShow(true)}} />
                     </div>
                 </div>
-                <BsTrash color="#888888" onClick={handleClickDelete} data-cy="todo-item-delete-button" />
+                <button onClick={handleClickDelete} data-cy="todo-item-delete-button"><BsTrash/></button>
             </div>
             {/* modal */}
             <FormModal show={show} onClose={() => setShow(false)} id={id} data={{title, priority}} setIsLoading={setIsLoading} />
